@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const foodSchema = mongoose.schema({
+const foodSchema = mongoose.Schema({
   name: { type: String, required: true },
   calories: { type: Number, required: true },
   type: { type: String, uppercase: true, enum: ['FRUIT', 'VEGITABLE', 'SNACK'] }
