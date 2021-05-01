@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const clothesSchema = mongoose.schema({
+const clothesSchema = mongoose.Schema({
   size: { type: Number, required: true },
   color: { type: String, required: true },
   type: { type: String, uppercase: true, enum: ['SHIRT', 'PANTS', 'HAT'] }
