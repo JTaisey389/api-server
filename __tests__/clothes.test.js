@@ -8,8 +8,8 @@ const clothes = new GenericCollection(Clothing);
 
 describe('--Test for Clothes Routes--', () => {
   it('can create a new item of clothes', () => {
-    let obj = { size: 'test for clothes', color: 'Choral Sand' };
-    let expected = { size: 'test for clothes', color: 'Choral Sand'};
+    let obj = { name: 'test for clothes', color: 'Choral Sand' };
+    let expected = { name: 'test for clothes', color: 'Choral Sand'};
 
     return clothes.create(obj).then((record) => {
       Object.keys(obj).forEach((item) => {
