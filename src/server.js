@@ -8,7 +8,7 @@ const dotenv = require ('dotenv');
 
 dotenv.config();
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/food' ;
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 mongoose.connect(MONGODB_URI, options);
 
