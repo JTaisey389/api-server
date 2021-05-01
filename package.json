@@ -1,0 +1,29 @@
+{
+  "name": "api-server",
+  "version": "1.0.0",
+  "description": "basic server with focus on mongoDb using class constructor for shaping data model and routes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest --coverage --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fizzo999/api-server.git"
+  },
+  "author": "Fizzo Pannosch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fizzo999/api-server/issues"
+  },
+  "homepage": "https://github.com/fizzo999/api-server#readme",
+  "dependencies": {
+    "@code-fellows/supergoose": "^1.1.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jest": "^26.6.3",
+    "mongoose": "^5.12.5",
+    "supertest": "^6.1.3"
+  }
+}
