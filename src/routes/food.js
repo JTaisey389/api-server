@@ -1,5 +1,6 @@
 'use strict';
 
+
 const express = require('express');
 const GenericCollection = require('../models/data-collection-class.js');
 const Food = require('../models/food-schema.js');

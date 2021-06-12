@@ -1,5 +1,6 @@
 'use strict';
 
+<<<<<<< HEAD
 const express = require('express');
 const app = express();
 
