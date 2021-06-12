@@ -28,6 +28,6 @@
   "bugs": {
     "url": "https://github.com/JTaisey389/api-server/issues"
   },
-  "homepage": "https://github.com/JTaisey389/api-server#readme"
+  "homepage": "https://github.com/JTaisey389/api-server#readme",
+  "devDependencies": {}
 }
-
