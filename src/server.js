@@ -1,43 +1,32 @@
 'use strict';
 
-// Third party modules
+<<<<<<< HEAD
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-const dotenv = require ('dotenv');
 
-dotenv.config();
+// const logger = require('./middleware/logger.js');
+// const clothes = require('./routes/clothes.js');
+// const food = require('./routes/food.js');
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/food' ;
-const options = { useNewUrlParser: true, useUnifiedTopology: true }
-mongoose.connect(MONGODB_URI, options);
+const notFound = require('./error-handlers/404.js');
+const error = require('./error-handlers/500.js');
+const productsRoutes = require ('./routes/products.js')
 
-// Event handlers
-const notFound = require('../src/error-handlers/404');
-const Errors = require('../src/error-handlers/500');
-const logger = require('./middleware/logger');
-
-//Routes 
-const clothesRoutes = require('./routes/clothes');
-const foodRoutes = require('./routes/food');
-
-// Global Middleware
 app.use(express.json());
-app.use(logger);
-app.use(clothesRoutes);
-app.use(foodRoutes);
+app.use(productsRoutes);
 
-// Error handlers 
-app.use('*', notFound)
-app.use(Errors);
+// app.use(logger);
+// app.use(clothes);
+// app.use(food);
 
-// Export to index.js
+app.use('*', notFound);
+app.use(error);
+
 module.exports = {
-  server: app,
-  start: (port) => {
+  server:app,
+  start: port => {
     app.listen(port, () => {
-      console.log(`Up on port ${port}`);
-    })
+      console.log(`up on port ${port}`);
+    });
   }
-}
-
+};

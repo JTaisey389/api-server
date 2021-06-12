@@ -1,49 +1,49 @@
 'use strict';
 
-//Initial start for express
+
 const express = require('express');
+const GenericCollection = require('../models/data-collection-class.js');
+const Food = require('../models/food-schema.js');
 
-//Pull in the mongo model and instantiate with the foods schema in models
-const Food = require('../models/food-schema');
-const GenericCollection = require('../models/data-collection-class');
-const foods = new GenericCollection(Food);
+const snackysnak = new GenericCollection(Food);
 
-// Firing up the express router
 const router = express.Router();
 
-// Food Routes
-router.get('/food', getfoods);
-router.get('/foods/:id', getfood);
+router.get('/food', getAllFood);
+router.get('/food/:id', getOneSnack);
 router.post('/food', createFood);
-router.put('/foods/:id', updateFood);
-router.delete('/foods/:id', deleteFood);
+router.put('/food/:id', updateFood);
+router.delete('/food/:id', deleteFood);
 
-async function getfoods(req, res){
-  let allfood = await foods.read();
-  res.status(200).json(allfood)
+// function getAllFood(req, res) { 
+//   let pileOfSnacks = snackysnak.read();
+//   res.status(200).json(pileOfSnacks)
+// }
+
+async function getAllFood(req, res) { // may have to turn this into a regular function and pass async later 
+  let pileOfSnacks = await snackysnak.read();
+  res.status(200).json(pileOfSnacks)
 }
-async function getfood(req, res){
+async function getOneSnack(req, res) {
+  const id = parseInt(req.params.id); // may need to delete parseInt 
+  let myFood = await snackysnak.read(id);
+  res.status(200).json(myFood);
+}
+async function createFood(req, res) { 
+  let content = req.body;
+  let newFood = await snackysnak.create(content);
+  res.status(201).json(newFood);
+}
+async function updateFood(req, res) {
   const id = req.params.id;
-  let thefood = await foods.read(id);
-  res.status(200).json(thefood);
-
-}
-async function createFood(req, res){
   let content = req.body;
-  let createdfood = await foods.create(content);
-  res.status(201).json(createdfood)
+  let gotGroceries = await snackysnak.update(id, content);
+  res.status(200).json(gotGroceries)
 }
-async function updateFood(req, res){
-  let id = req.params.id;
-  let content = req.body;
-  let updatedfood = await foods.update(id, content);
-  res.status(200).json(updatedfood);
-
-}
-async function deleteFood(req, res){
-  let id = req.params.id;
-  let deletedfood = await foods.delete(id);
-  res.status(200).json(deletedfood)
+async function deleteFood(req, res) {
+  const id = req.params.id;
+  let trashedFood = await snackysnak.delete(id);
+  res.status(200).json({trashedFood});
 }
 
 module.exports = router;

@@ -1,6 +1,6 @@
 # Lab - Class 04
 
-## Project: APU Server
+## Project: API Server
 
 ### Author: Jason Taisey
 
@@ -27,3 +27,4 @@ https://api-server-lab-03.herokuapp.com/
 ## UML/WRRC
 
 ![WRRC](assets/Lab_03_WRRC.jpg)
+

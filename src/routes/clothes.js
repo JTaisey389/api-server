@@ -1,49 +1,48 @@
 'use strict';
 
-//Initial start for express
 const express = require('express');
+const GenericCollection = require('../models/data-collection-class.js');
+const Clothing = require('../models/clothes-schema.js');
 
-//Pull in the mongo model and instantiate with the foods schema in models
-const Clothes = require('../models/clothes-schema');
-const GenericCollection = require('../models/data-collection-class');
-const clothes = new GenericCollection(Clothes);
+const clothes = new GenericCollection(Clothing);
 
-// Firing up the express router
 const router = express.Router();
 
-// Food Routes
-router.get('/clothes', getClothes);
-router.get('/clothes/:id', getClothing);
+router.get('/clothes', getAllClothes);
+router.get('/clothes/:id', getOneClothes);
 router.post('/clothes', createClothes);
-router.put('/clothes/:id', updateClothing);
-router.delete('/clothes/:id', deleteClothing);
+router.put('/clothes/:id', updateClothes);
+router.delete('/clothes/:id', deleteClothes);
 
-async function getClothes(req, res){
-  let allclothes = await clothes.read();
-  res.status(200).json(allclothes)
+// function getAllClothes(req, res) { 
+//   let pileOfClothes = clothes.read();
+//   res.status(200).json(pileOfClothes)
+// }
+
+async function getAllClothes(req, res) { // may have to turn this into a regular function and pass async later 
+  let pileOfClothes = await clothes.read();
+  res.status(200).json(pileOfClothes)
 }
-async function getClothing(req, res){
+async function getOneClothes(req, res) {
+  const id = parseInt(req.params.id); // may need to delete parseInt 
+  let myClothes = await clothes.read(id);
+  res.status(200).json(myClothes);
+}
+async function createClothes(req, res) { 
+  let content = req.body;
+  let newClothes = await clothes.create(content);
+  res.status(201).json(newClothes);
+}
+async function updateClothes(req, res) {
   const id = req.params.id;
-  let theclothes = await clothes.read(id);
-  res.status(200).json(theclothes);
-
-}
-async function createClothes(req, res){
   let content = req.body;
-  let createdclothing = await clothes.create(content);
-  res.status(201).json(createdclothing)
+  let washedClothes = await clothes.update(id, content);
+  res.status(200).json(washedClothes)
 }
-async function updateClothing(req, res){
-  let id = req.params.id;
-  let content = req.body;
-  let updatedclothing = await clothes.update(id, content);
-  res.status(200).json(updatedclothing);
-
-}
-async function deleteClothing(req, res){
-  let id = req.params.id;
-  let deletedclothing = await clothes.delete(id);
-  res.status(200).json(deletedclothing)
+async function deleteClothes(req, res) {
+  const id = req.params.id;
+  let trashedClothes = await clothes.delete(id);
+  res.status(200).json({trashedClothes});
 }
 
 module.exports = router;

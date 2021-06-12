@@ -1,5 +1,10 @@
 'use strict';
 
+require('@code-fellows/supergoose');
+
+const { server } = require('../src/server.js');
+const testRequest = supergoose(server);
+
 const { server } = require('../src/server');
 const supertest = require('supertest');
 const request = supertest(server);
